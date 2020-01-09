@@ -16,7 +16,13 @@
     //     setTimeout(function () {
     //         resolve('foo');
     //     }, 300);
-    // });
+    // })
+    // .then(res => {
+    //     console.log(123);
+    // })
+    // .then(res => {
+    //     console.log(456);
+    // })
 
     // promise1.then(function (value) {
     //     
@@ -40,9 +46,20 @@
     class myPromise {
         constructor(fun) {
             const thenfunList = []
-            const resolve = (a) => {
+            var  res1 = null
+            const resolve = (r) => {
                 thenfunList.map((f) => {
-                    const res1 = f(a)
+                    const callbackResult = f(r)
+                    if (typeof callbackResult  === 'object' && callbackResult.then) {
+                        // return new myPromise(function (resolve, reject) {
+                        //     setTimeout(() => {
+                        //         resolve(callbackResult)
+                        //     }, 1000);
+                        // })
+                        callbackResult.then(res1);
+                    } else {
+                        res1(callbackResult)
+                    } 
                 })
             }
             const reject = (b) => {
@@ -51,20 +68,36 @@
             fun(resolve, reject)
             this.then = (fun2) => {
                 thenfunList.push(fun2)
+                return new myPromise((res, rej) => {
+                    res1 = res
+                })
             }
             return {
                 then: this.then
             };
         }
     }
+
     var p = new myPromise(function (resolve, reject) {
         setTimeout(() => {
-            resolve('123')
+            resolve('1')
         }, 1000);
     })
     
-    var a = p.then(res => {
-        console.log('res: ', res)
+    var a = p
+    .then(res => {
+        console.log('res: ', res);
+        // return new myPromise((res, rej) => {
+        //     setTimeout(() => {
+        //         res(2)
+        //     }, 2000);
+        // })
+    })
+    .then(res => {
+        setTimeout(() => {
+            
+        console.log('res: ', res);
+        }, 2000);
     })
         
 </script>
