@@ -19,7 +19,7 @@
     // });
 
     // promise1.then(function (value) {
-    //     console.log('value: ', value);
+    //     
     //     // setTimeout(() => {
     //     //     return 12
     //     // }, 2000);
@@ -30,7 +30,7 @@
     //         }, 2000);
     //     })
     // }).then(res => {
-    //     console.log('res: ', res);
+    //     
 
     // })
     // ;
@@ -43,8 +43,6 @@
             const resolve = (a) => {
                 thenfunList.map((f) => {
                     const res1 = f(a)
-                    console.log('res1: ', res1);
-                    return 1212112
                 })
             }
             const reject = (b) => {
@@ -67,9 +65,8 @@
     
     var a = p.then(res => {
         console.log('res: ', res)
-        return '456'
     })
-        console.log('a: ', a);
+        
 </script>
 
 </html>
