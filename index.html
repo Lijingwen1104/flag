@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // const promise1 = new Promise(function (resolve, reject) {
+    //     setTimeout(function () {
+    //         resolve('foo');
+    //     }, 300);
+    // });
+
+    // promise1.then(function (value) {
+    //     console.log('value: ', value);
+    //     // setTimeout(() => {
+    //     //     return 12
+    //     // }, 2000);
+    //     // expected output: "foo"
+    //     return new Promise((res, rej) => {
+    //         setTimeout(() => {
+    //             res(343443)
+    //         }, 2000);
+    //     })
+    // }).then(res => {
+    //     console.log('res: ', res);
+
+    // })
+    // ;
+
+    // 
+  // expected output: [object Promise]
+    class myPromise {
+        constructor(fun) {
+            const thenfunList = []
+            const resolve = (a) => {
+                thenfunList.map((f) => {
+                    const res1 = f(a)
+                    console.log('res1: ', res1);
+                    return 1212112
+                })
+            }
+            const reject = (b) => {
+                
+            }
+            fun(resolve, reject)
+            this.then = (fun2) => {
+                thenfunList.push(fun2)
+            }
+            return {
+                then: this.then
+            };
+        }
+    }
+    var p = new myPromise(function (resolve, reject) {
+        setTimeout(() => {
+            resolve('123')
+        }, 1000);
+    })
+    
+    var a = p.then(res => {
+        console.log('res: ', res)
+        return '456'
+    })
+        console.log('a: ', a);
+</script>
+
+</html>
